@@ -1,5 +1,5 @@
 # Automating AWS with Python
-Repository automating AWS with Python (using boot3 SDK).
+Repository for automating AWS with Python (using boot3 SDK).
 
 ## 01-webotron
 
