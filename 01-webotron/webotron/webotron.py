@@ -47,7 +47,6 @@ def sync(pathname, bucket):
             if p.is_dir(): handle_directory(p)
             if p.is_file():
                 upload_file(s3_bucket, str(p), str(p.relative_to(root)))
-                #print("Path {}\n Key: {}".format(p, p.relative_to(root)))
 
     handle_directory(root)
 
