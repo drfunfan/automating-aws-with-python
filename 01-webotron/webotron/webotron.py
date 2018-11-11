@@ -31,11 +31,11 @@ def setup_bucket(bucket):
     "Create and configure S3 bucket"
 
     s3_bucket = None
-    
+
     try:
         s3_bucket = s3.create_bucket(
             Bucket=bucket,
-            CreateBucketConfiguration={'LocationConstraint': session.region_name }
+            CreateBucketConfiguration= {'LocationConstraint': session.region_name }
         )
     except ClientError as ex:
         if ex.response['Error']['Code'] == 'BucketAlreadyOwnedByYou':
@@ -63,24 +63,24 @@ def setup_bucket(bucket):
     pol.put(Policy=policy)
 
     ws = s3_bucket.Website()
-    ws.put(WebsiteConfiguration={'ErrorDocument': {
+    ws.put(WebsiteConfiguration = {
+            'ErrorDocument': {
                 'Key': 'error.html'
             },
             'IndexDocument': {
                 'Suffix': 'index.html'
-            }})
-    #url = "http://%s.s3-website.eu-west-2.amazonaws.com" % s3_bucket.name
+            }
+        })
     return
 
 
 def upload_file(s3_bucket, path, key):
     content_type = mimetypes.guess_type(key)[0] or 'text/plain'
     s3_bucket.upload_file(
-    path,
-    key,
-    ExtraArgs={
-        'ContentType': content_type
-    })
+        path,
+        key,
+        ExtraArgs = {'ContentType': content_type}
+    )
 
 @cli.command('sync')
 @click.argument('pathname', type=click.Path(exists=True))
